@@ -1,4 +1,4 @@
-# Intro a la asincronía
+# Asincronía no es multi-hilos
 
 Existe el malentendido de que la asincronía significa trabajar con hilos. Esto no es cierto, pues la asincronía es un solo hilo.
 
@@ -6,11 +6,11 @@ Vamos a explorar un ejemplo que demuestra esto, mientras revisamos algunos de co
 
 ## Temas a ver
 
-- Duration: [code](duration.dart)
-- DateTime: [code](datetime.dart)
-- Intro a Futuros: [code](futures.dart)
-- Sintaxis async/await: [code](async_await.dart)
-- Asincrononía no usa hilos: [code](no_threads.dart)
+- Duration: [code](duration.dart) - [video](https://youtu.be/nirhpSFvynQ)
+- DateTime: [code](datetime.dart) - [video](https://youtu.be/n8w3qVEmiGo)
+- Intro a Futuros: [code](futures.dart) - [video](https://youtu.be/6ffqqXlynE8)
+- Sintaxis async/await: [code](async_await.dart) - [video](https://youtu.be/Kr0pYnSgtbQ)
+- Asincrononía no usa hilos: [code](no_threads.dart) - [video](https://youtu.be/QqPI7E2Gxi8)
 
 ## Disclaimer
 
