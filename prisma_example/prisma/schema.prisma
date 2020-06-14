@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Jedi {
+  id         Int    @default(autoincrement()) @id
+  name       String @unique
+  race       String
+  powerLevel Float
+  ship       Ship?  @relation(fields: [shipId], references: [id])
+  shipId     Int?
+}
+
+model Sidth {
+  id         Int    @default(autoincrement()) @id
+  name       String @unique
+  race       String
+  powerLevel Float
+  ship       Ship?  @relation(fields: [shipId], references: [id])
+  shipId     Int?
+}
+
+model Ship {
+  id                Int     @default(autoincrement()) @id
+  name              String  @unique
+  hyperSpaceEnabled Boolean @default(false)
+  jedis             Jedi[]
+  sidth             Sidth[]
+}
