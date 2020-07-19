@@ -41,3 +41,12 @@ app.*.map.json
 
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
+# projects
+ios/
+android/
+macos/
+
+# other innecessary files
+.metadata
+pubspec.lock
