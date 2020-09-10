@@ -43,7 +43,8 @@ app.*.map.json
 # Exceptions to above rules.
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
-# metada and platforms
+# coverage, metada and platforms
+coverage/
 .metadata
 android/
 ios/
