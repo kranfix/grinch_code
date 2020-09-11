@@ -23,4 +23,16 @@ class TodoRepo {
     final todoList = read(todoListProvider);
     todoList.addAll(Todo.parseList(result['data']['todoList']));
   }
+
+  Future<Todo> findOne(String id) async {
+    assert(id != null);
+    final response =
+        await http.get('$_url?query={todo(id:"$id"){id,text,done}}');
+    final result = json.decode(response.body) as Map<String, dynamic>;
+    if (result['errors'] != null) {
+      print(result['errors']);
+      throw Exception('Todo(id: "$id") can not be read');
+    }
+    return Todo.fromMap(result['data']['todo']);
+  }
 }
