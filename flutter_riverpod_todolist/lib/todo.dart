@@ -36,6 +36,14 @@ class Todo {
 class TodoList extends StateNotifier<List<Todo>> {
   TodoList([List<Todo> initialTodos]) : super(initialTodos ?? []);
 
+  void addAll(List<Todo> todos) {
+    assert(todos != null);
+    state = [
+      ...state,
+      ...todos,
+    ];
+  }
+
   void add(Todo todo) {
     assert(todo != null);
     state = [
