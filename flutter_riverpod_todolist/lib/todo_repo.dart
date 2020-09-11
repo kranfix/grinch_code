@@ -35,4 +35,18 @@ class TodoRepo {
     }
     return Todo.fromMap(result['data']['todo']);
   }
+
+  Future<void> createOne(String text) async {
+    assert(text != null);
+    final response = await http.get(
+      '$_url?query=mutation+_{createTodo(text:"$text"){id,text,done}}',
+    );
+    final result = json.decode(response.body) as Map<String, dynamic>;
+    if (result['errors'] != null) {
+      throw Exception('Todo(text: "$text") could not be created');
+    }
+    final newTodo = Todo.fromMap(result['data']['createTodo']);
+    final todoList = read(todoListProvider);
+    todoList.add(newTodo);
+  }
 }
