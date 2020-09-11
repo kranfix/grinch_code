@@ -103,23 +103,33 @@ var rootMutation = graphql.NewObject(graphql.ObjectConfig{
 			Type:        todoType, // the return type for this field
 			Description: "Update existing todo, mark it done or not done",
 			Args: graphql.FieldConfigArgument{
+				"id": &graphql.ArgumentConfig{
+					Type: graphql.NewNonNull(graphql.String),
+				},
 				"done": &graphql.ArgumentConfig{
 					Type: graphql.Boolean,
 				},
-				"id": &graphql.ArgumentConfig{
-					Type: graphql.NewNonNull(graphql.String),
+				"text": &graphql.ArgumentConfig{
+					Type: graphql.String,
 				},
 			},
 			Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 				// marshall and cast the argument value
-				done, _ := params.Args["done"].(bool)
 				id, _ := params.Args["id"].(string)
+				done, isDoneOk := params.Args["done"].(bool)
+				text, isTextOk := params.Args["text"].(string)
+
 				affectedTodo := Todo{}
 
 				// Search list for todo with id and change the done variable
 				for i := 0; i < len(TodoList); i++ {
 					if TodoList[i].ID == id {
-						TodoList[i].Done = done
+						if isDoneOk {
+							TodoList[i].Done = done
+						}
+						if isTextOk {
+							TodoList[i].Text = text
+						}
 						// Assign updated todo so we can return it
 						affectedTodo = TodoList[i]
 						break
