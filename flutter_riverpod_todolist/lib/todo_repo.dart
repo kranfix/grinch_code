@@ -67,4 +67,18 @@ class TodoRepo {
     final todoList = read(todoListProvider);
     todoList.updateOne(newTodo);
   }
+
+  Future<void> toggleOne(Todo todo) async {
+    assert(todo != null);
+    final response = await http.get(
+      '$_url?query=mutation+_{updateTodo(id:"${todo.id}",done:${todo.done}){id,text,done}}',
+    );
+    final result = json.decode(response.body) as Map<String, dynamic>;
+    if (result['errors'] != null) {
+      throw Exception('Todo(id: "${todo.id}") could not be toggled');
+    }
+    final newTodo = Todo.fromMap(result['data']['updateTodo']);
+    final todoList = read(todoListProvider);
+    todoList.updateOne(newTodo);
+  }
 }
