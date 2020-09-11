@@ -71,7 +71,7 @@ class TodoRepo {
   Future<void> toggleOne(Todo todo) async {
     assert(todo != null);
     final response = await http.get(
-      '$_url?query=mutation+_{updateTodo(id:"${todo.id}",done:${todo.done}){id,text,done}}',
+      '$_url?query=mutation+_{updateTodo(id:"${todo.id}",done:${!todo.done}){id,text,done}}',
     );
     final result = json.decode(response.body) as Map<String, dynamic>;
     if (result['errors'] != null) {
