@@ -49,4 +49,22 @@ class TodoRepo {
     final todoList = read(todoListProvider);
     todoList.add(newTodo);
   }
+
+  Future<void> editOne(Todo todo, String text) async {
+    assert(todo != null);
+    assert(text != null);
+    if (todo.text == text) return;
+
+    final response = await http.get(
+      '$_url?query=mutation+_{updateTodo(id:"${todo.id}",text:"$text"){id,text,done}}',
+    );
+    final result = json.decode(response.body) as Map<String, dynamic>;
+    if (result['errors'] != null) {
+      print(result);
+      throw Exception('Todo(id: "${todo.id}") could not be toggled');
+    }
+    final newTodo = Todo.fromMap(result['data']['updateTodo']);
+    final todoList = read(todoListProvider);
+    todoList.updateOne(newTodo);
+  }
 }
