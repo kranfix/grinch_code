@@ -1,0 +1,17 @@
+[package]
+name = "rust-graphql-users"
+version = "0.1.0"
+authors = ["Frank Moreno <frankmoreno1993@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+serde_json = "1.0"
+url = "2"
+juniper = "0.14"
+tokio = "0.2"
+hyper = "0.13"
+futures = "0.3.5"
+
+[dev-dependencies]
+pretty_env_logger = "0.4"
+reqwest = { version = "0.10", features = ["blocking", "rustls-tls"] }
